@@ -1,0 +1,26 @@
+{
+  "skill_name": "image-generation",
+  "evals": [
+    {
+      "id": 0,
+      "name": "logo-no-output-path",
+      "prompt": "Make me a logo for my coffee shop called Ember & Oak — warm and minimal, something I can use on the website header. Save it somewhere in my project.",
+      "expected_output": "A square-ish PNG logo with a warm, minimal aesthetic, written to a sensible absolute path the agent chose (e.g. an assets/ dir). The skill must pick an output path even though the user didn't give an exact one, and the file must exist there.",
+      "files": []
+    },
+    {
+      "id": 1,
+      "name": "hero-explicit-path-and-style",
+      "prompt": "I need a hero image for my meditation app landing page. Calm and serene, soft pastel gradients, lots of negative space, no text. Save it to /tmp/image-generation-test/meditation_hero.png",
+      "expected_output": "A landscape PNG at exactly /tmp/image-generation-test/meditation_hero.png that reflects the calm/serene/pastel-gradient brief with no baked-in text.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "name": "edit-with-reference",
+      "prompt": "Take this mascot image and restyle it as a glossy 3D render while keeping the same pose and friendly expression. Reference: /tmp/image-generation-test/test_mascot.png. Save the result to /tmp/image-generation-test/mascot_3d.png",
+      "expected_output": "A PNG at /tmp/image-generation-test/mascot_3d.png that is recognizably the same mascot/pose from the reference but rendered in a glossy 3D style. The skill must pass the reference via --reference.",
+      "files": ["/tmp/image-generation-test/test_mascot.png"]
+    }
+  ]
+}
