@@ -81,6 +81,7 @@ lands at `--output`.
 | Wrong subject / ignored constraint | Refine `--prompt`/`--style` with more specific, concrete direction; rerun. Models reward specificity. |
 | Need to write outside workspace and fallback isn't enough | Add `--sandbox danger-full-access`. |
 | Text in the image is garbled | Image models struggle with legible text; minimize baked-in text or add it in post. |
+| Windows: `python3` not found | Use `python` or `py` instead (python.org installs those names). |
 
 ## codex's own image use-case taxonomy
 

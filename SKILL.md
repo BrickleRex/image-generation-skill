@@ -49,11 +49,12 @@ JSON, but if you ever generate images another way, still confirm the file exists
    like `1536x1024`). Match the asset's use — `landscape` for hero/banner, `portrait` for posters,
    `square` for logos/avatars/social tiles.
 
-3. **Run the script.** `SKILL_DIR` is this skill's base directory (Claude Code shows it when the
-   skill loads; for a personal install it is `~/.claude/skills/image-generation`):
+3. **Run the script.** Replace `<SKILL_DIR>` with this skill's base directory (Claude Code shows it
+   when the skill loads; for a personal install it is `~/.claude/skills/image-generation`). On
+   Windows, if `python3` is not found, use `python` or `py` instead.
 
    ```bash
-   python3 "$SKILL_DIR/scripts/generate_image.py" \
+   python3 "<SKILL_DIR>/scripts/generate_image.py" \
      --prompt "<subject>" \
      --style "<style / brand guidelines>" \
      --size landscape \
@@ -73,7 +74,7 @@ JSON, but if you ever generate images another way, still confirm the file exists
 Pass the source image(s) as references; codex uses them as visual input:
 
 ```bash
-python3 "$SKILL_DIR/scripts/generate_image.py" \
+python3 "<SKILL_DIR>/scripts/generate_image.py" \
   --prompt "Put this product on a marble kitchen counter in soft morning light" \
   --reference /path/to/product.png \
   --output /path/to/product_on_counter.png

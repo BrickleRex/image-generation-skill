@@ -12,7 +12,9 @@ Claude writes the brief, OpenAI's Codex draws the picture, and the image is save
 - **Claude Code** ([claude.com/claude-code](https://claude.com/claude-code))
 - **A ChatGPT plan that includes Codex** (Plus, Pro, Business, Edu or Enterprise), or an OpenAI API key.
   The pictures use your ChatGPT / Codex allowance.
-- **A Mac or Linux computer** with Python 3 (most already have it).
+- **A Mac, Windows or Linux computer** with Python 3. Most Macs and Linux computers already have it;
+  on Windows, install it from [python.org](https://www.python.org/downloads/).
+  (Windows should work but has not been tested yet.)
 
 ## Install (about 5 minutes)
 
@@ -65,6 +67,7 @@ Each picture takes about 30 seconds to 2 minutes. Claude tells you where it save
 | A sign-in or login error | Run `codex login` again. |
 | Claude doesn't make an image | Close and reopen Claude Code, then ask again and say "make an image". |
 | Words inside the picture are garbled | Image models are bad at text. Ask for no text and add words later. |
+| Windows: "python3 not found" | Install Python from [python.org](https://www.python.org/downloads/), then ask again. Claude will use `python` or `py`. |
 
 ## What's inside
 

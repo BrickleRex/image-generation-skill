@@ -45,6 +45,15 @@ SIZE_HINTS = {
 }
 
 
+def use_utf8_output() -> None:
+    """Print UTF-8 whatever the terminal's code page (Windows often defaults to cp1252)."""
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            stream.reconfigure(encoding="utf-8", errors="replace")
+        except (AttributeError, ValueError):
+            pass
+
+
 def log(msg: str) -> None:
     print(msg, file=sys.stderr, flush=True)
 
@@ -114,8 +123,8 @@ def build_prompt(args) -> str:
         "",
         "Steps:",
         "  1. Generate the image with your image generation tool.",
-        f'  2. Run `mkdir -p "{os.path.dirname(args.output)}"`, then copy the resulting PNG to the exact path above.',
-        f'  3. Verify with `ls -l "{args.output}"`.',
+        "  2. Copy the resulting PNG to the exact path above (its folder already exists).",
+        "  3. Check that the file now exists at that path.",
         "  4. In your final message, state the absolute output path and the file size in bytes.",
         "",
         "Produce only one final image unless the request explicitly asks for variations.",
@@ -124,6 +133,7 @@ def build_prompt(args) -> str:
 
 
 def main() -> int:
+    use_utf8_output()
     ap = argparse.ArgumentParser(description="Generate an image via codex, guaranteed to an exact output path.")
     ap.add_argument("--prompt", required=True, help="What to depict (the image subject / primary request).")
     ap.add_argument("--output", required=True, help="Absolute path where the final PNG must be written.")
@@ -178,7 +188,9 @@ def main() -> int:
     before = snapshot_generated()
     start_time = time.time()
     try:
-        proc = subprocess.run(cmd, input=prompt, text=True, capture_output=True, timeout=args.timeout)
+        # UTF-8 both ways: prompts and codex's replies can hold any character (quotes, accents, emoji).
+        proc = subprocess.run(cmd, input=prompt, text=True, encoding="utf-8", errors="replace",
+                              capture_output=True, timeout=args.timeout)
     except subprocess.TimeoutExpired:
         log(f"ERROR: codex timed out after {args.timeout}s.")
         # Still try the fallback — codex may have produced the image before the wrapper gave up.
